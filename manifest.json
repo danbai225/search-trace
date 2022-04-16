@@ -8,7 +8,7 @@
     },
     "description": "A plain text description",
     "author": "DanBai",
-    "background": {
+    "background": { 
         "service_worker": "background.js"
     },
     "content_scripts": [
@@ -27,8 +27,8 @@
         "http://*/*",
         "https://*/*"
     ],
-    "options_page": "popup.html",
+    "options_page": "test.html",
     "options_ui": {
-        "page": "popup.html"
+        "page": "test.html"
     }
 }
