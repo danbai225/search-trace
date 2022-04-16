@@ -1,4 +1,4 @@
-console.log("load");
+
 function replace(str, substr, newstr) {
   var p = -1; // 字符出现位置
   var s = 0; // 下一次起始位置
