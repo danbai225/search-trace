@@ -11,6 +11,7 @@ function replace(str, substr, newstr) {
   return str;
 }
 $(function () {
+  //去除 css  js 代码
   var contentStr = $("body").text();
   contentStr = replace(contentStr, "\n", "");
   contentStr = replace(contentStr, "\t", "");
