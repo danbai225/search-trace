@@ -73,16 +73,11 @@ function getText(){
 function postText(text){
   oldText=text;
   if (text.length > 0) {
-    $.ajax({
-      type: "post",
-      url: "http://127.0.0.1:49492/trace/add",
-      contentType: "application/json",
-      data: JSON.stringify({
-        title: document.title,
-        content: text,
-        url: document.URL,
-      }),
-    });
+    chrome.runtime.sendMessage({type:"postText",data: JSON.stringify({
+      title: document.title,
+      content: text,
+      url: document.URL,
+    }) });
   }
 }
 function myChange(){
@@ -113,11 +108,4 @@ function ListeningUrlChanges(){
 $(function () {
   ListeningUrlChanges();
   postText(getText());
-});
-let text = getText();
-let arr = [];
-arr.push({content:text,url:document.URL,title:document.title});
-
-chrome.runtime.sendMessage({ greeting: JSON.stringify(arr) }, function (response) {
-  console.log(response.farewell);
 });

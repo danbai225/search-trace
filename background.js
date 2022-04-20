@@ -1,10 +1,15 @@
+import fetch from "./fetch.min.js"
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log(
-    sender.tab
-      ? "from a content script:" + sender.tab.url
-      : "from the extension"
-  );
-  
-  if (request.greeting !== "hello") sendResponse({ farewell: request.greeting });
+  switch(request.type){
+    case "postText":
+       fetch.fetch('http://127.0.0.1:49492/trace/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: request.data
+      });
+      break
+  }
 });
 
