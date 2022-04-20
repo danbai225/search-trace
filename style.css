@@ -1,0 +1,35 @@
+html,body{
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-width: 9em;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+li{
+    color: #333;
+    font-size: 14px;
+    line-height: 2.5em;
+    background-color: #fff;
+}
+
+li > i{
+    padding: 2px;
+}
+
+ul,li:hover{
+    background-color: #ccc;
+}
+li:active{
+    background-color: #145ccd;
+    border-radius: 5px;
+}
+a{
+    text-decoration:none;color:#145ccd;
+}
+
