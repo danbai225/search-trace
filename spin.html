@@ -1,12 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    test seting
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./common.css">
+        <link rel="stylesheet" href="./setting.css">
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <title>setting</title>
+    </head>
+    <body>
+        <div class="interface">
+            <!-- 左边导航栏 -->
+            <div class="left nav">
+                <h2>SearchTrace</h2>
+                <ul class="target">
+                    设定
+                    <li id="about" ><a href=""><i class="fa fa-paper-plane-o" aria-hidden="true"></i>关于</a> </li>
+                    <li id="proxy"><a href=""><i class="fa fa-globe" aria-hidden="true"></i>proxy</a></li>
+                    <li><a href=""><i class="fa fa-hashtag" aria-hidden="true"></i>aoto switch</a></li>
+                </ul>
+            <div class="actions">
+                <ul>
+                    ACTIONS
+                    <li>
+                        <a class="btn btn-danger" href="#">
+                            <i class="fa fa-hand-peace-o"></i>应用选项</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-danger" href="#">
+                            <i class="fa fa-hand-peace-o"></i>撤销更改</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+            <!-- 右边out -->
+            <div class="right out">
+                <!-- tab栏 首页 -->
+              <div class="about">             
+                <h2>关于</h2>
+                <hr>
+                <p> <i class="fa fa-fort-awesome fa-3x" style="color: #145ccd;"></i> <b>SearchTrace</b> <span>浏览器搜索历史记录</span> </p>
+                <div class="top">
+                    <button type="button" class="btn btn-info"><i class="fa fa-commenting" aria-hidden="true"></i>反馈问题</button>
+                    <button type="button" class="btn btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>重置选项</button>
+                </div>
+                <div class="content">
+                    <p>
+                        <span>版本 1.0</span>
+                    </p>
+                </div>  
+            </div>
+                <!-- tab栏 proxy -->
+                <div class="proxy">
+                    <h2>切换规则</h2>
+                    <div class="panel panel-default">      
+                        <!-- Table -->
+                        <table class="table">
+                          <tr>  
+                              <th>ID</th>
+                              <th><i class="fa fa-question-circle" aria-hidden="true" style="color: #145ccd;"></i>匹配规则</th>
+                              <th id="matching" >匹配条件</th>
+                              <th>是否记录</th>
+                              <th>是否启用</th>
+                          </tr>
+                          <tr>
+                              <td>1</td>
+                              <td><textarea name="" id="" cols="60" rows="1" placeholder="匹配规则一行一个"></textarea></td>
+                              <td> 
+                                <div class="input-group">  
+                                <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">域名通配符<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">域名通配符</a></li>
+                                  <li><a href="#">正则</a></li>
+                                </ul>
+                              </div><!-- /btn-group -->
+                            </div> </td>
+                              <td>
+                                <select>
+                                    <option value ="record">记录</option>
+                                    <option value ="norecord">不记录</option>
+                                  </select>
+                              </td>
+                              <td>
+                                <input class="glyphicon glyphicon-unchecked" type="checkbox" aria-label="...">
+                              </td>
+                          </tr>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>   
+        <script src="./common.js"></script>
+        <script src="./FontAwesome.js"></script>    
+        <script src="./setting.js"></script>
+    </body>
+
 </html>

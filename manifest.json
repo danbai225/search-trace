@@ -28,8 +28,8 @@
         "http://*/*",
         "https://*/*"
     ],
-    "options_page": "test.html",
+    "options_page": "spin.html",
     "options_ui": {
-        "page": "test.html"
+        "page": "spin.html"
     }
 }

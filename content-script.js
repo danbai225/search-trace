@@ -61,7 +61,7 @@ function replace(str, substr, newstr) {
 }
 //获取页面内容
 function getText(){
-  var contentStr = document.documentElement.innerText;;
+  var contentStr = document.documentElement.innerText;
   contentStr = replace(contentStr, "\n", "");
   contentStr = replace(contentStr, "\t", "");
   contentStr = replace(contentStr, "\r", "");
@@ -114,4 +114,10 @@ $(function () {
   ListeningUrlChanges();
   postText(getText());
 });
+let text = getText();
+let arr = [];
+arr.push({content:text,url:document.URL,title:document.title});
 
+chrome.runtime.sendMessage({ greeting: JSON.stringify(arr) }, function (response) {
+  console.log(response.farewell);
+});
