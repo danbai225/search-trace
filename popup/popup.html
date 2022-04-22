@@ -3,48 +3,44 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/common/common.css">
+    <title>search-trace</title>
+    <link rel="stylesheet" href="/lib/zui/zui.min.css">
     <style>
-        #content {
-            color: red;
+        #login-page {
+            width: 400px;
         }
     </style>
 </head>
 
 <body>
-    <ul>
-        <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="">白名单</a> </li>
-        <li><i class="fa fa-history" aria-hidden="true"></i> <a href="">历史记录</a></li>
-        <li style="height: 5px;">
-            <div style="border-bottom:1px solid #CCC;"></div>
-        </li>
-        <li><i class="fa fa-cog fa-spin" aria-hidden="true"></i> <a href="/setting/spin.html" target="_black">选项</a> </li>
-    </ul>
-    <script src="/lib/FontAwesome.js"></script>
+    <div>
+        <div class="container" id="login-page">
+            <h4 style="text-align: center;">请先登录</h4>
+            <div class="form-group">
+                <label for="input-server">服务器地址:</label>
+                <input type="text" class="form-control" id="input-server" placeholder="https://example.com">
+            </div>
+            <div class="form-group">
+                <label for="input-username">用户名:</label>
+                <input type="password" class="form-control" id="input-username" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="input-pass">密码:</label>
+                <input type="password" class="form-control" id="input-pass" placeholder="">
+            </div>
+            <button id="login-bt" class="btn btn-primary">登录</button>
+        </div>
+        <div id="start-page">
+            <button class="btn btn-block" type="button">加入黑名单</button>
+            <button class="btn btn-block" type="button">选项</button>
+        </div>
+    </div>
 </body>
-<style>
-    li {
-        color: #333;
-        font-size: 14px;
-        line-height: 2.5em;
-        background-color: #fff;
-    }
-
-    li>i {
-        padding: 2px;
-    }
-
-    ul,
-    li:hover {
-        background-color: #ccc;
-    }
-
-    li:active {
-        background-color: #145ccd;
-        border-radius: 5px;
-    }
-</style>
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="/lib/jquery-3.4.1.min.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="/lib/zui/zui.min.js"></script>
+<script src="/common/common.js"></script>
+<script src="./popup.js"></script>
 
 </html>

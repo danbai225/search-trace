@@ -27,8 +27,11 @@
         "http://*/*",
         "https://*/*"
     ],
-    "options_page": "setting/spin.html",
+    "options_page": "setting/setting.html",
     "options_ui": {
-        "page": "setting/spin.html"
-    }
+        "page": "setting/setting.html"
+    },
+    "permissions": [
+        "storage"
+      ]
 }
