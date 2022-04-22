@@ -1,4 +1,4 @@
-import fetch from "./fetch.min.js";
+import fetch from "./lib/fetch.min.js";
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.type) {
     case "postText": {

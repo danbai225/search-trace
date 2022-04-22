@@ -3,10 +3,10 @@
     "name": "search-trace",
     "version": "1.0",
     "action": {
-        "default_title": "Click to view a popup",
-        "default_popup": "popup.html"
+        "default_title": "寻迹-从这里开始",
+        "default_popup": "popup/popup.html"
     },
-    "description": "A plain text description",
+    "description": "寻迹-从这里开始",
     "author": "DanBai",
     "background": { 
         "service_worker": "background.js",
@@ -19,18 +19,16 @@
                 "https://*/*"
             ],
             "js": [
-                "jquery.min.js",
-                "content-script.js"
+                "content/content-script.js"
             ]
         }
     ],
-    
     "host_permissions": [
         "http://*/*",
         "https://*/*"
     ],
-    "options_page": "spin.html",
+    "options_page": "setting/spin.html",
     "options_ui": {
-        "page": "spin.html"
+        "page": "setting/spin.html"
     }
 }
