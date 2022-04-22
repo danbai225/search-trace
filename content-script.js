@@ -108,7 +108,12 @@ function ListeningUrlChanges() {
 }
 
 //页面加载后事件
-$(function () {
-  ListeningUrlChanges();
-  postText(getText());
-});
+$(document).ready(function(){
+  $("#a").click(function(){
+    ListeningUrlChanges();
+    postText(getText());
+  })
+})
+// $(function () {
+ 
+// });
