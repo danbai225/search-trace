@@ -75,11 +75,11 @@ function postText(text) {
   if (text.length > 0) {
     chrome.runtime.sendMessage({
       type: "postText",
-      data: JSON.stringify({
+      data: {
         title: document.title,
         content: text,
         url: document.URL,
-      }),
+      },
     });
   }
 }

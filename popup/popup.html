@@ -8,6 +8,7 @@
     <style>
         #login-page {
             width: 400px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -28,11 +29,13 @@
                 <label for="input-pass">密码:</label>
                 <input type="password" class="form-control" id="input-pass" placeholder="">
             </div>
-            <button id="login-bt" class="btn btn-primary">登录</button>
+            <button id="login-bt" class="btn btn-primary btn-block">登录</button>
         </div>
         <div id="start-page">
-            <button class="btn btn-block" type="button">加入黑名单</button>
-            <button class="btn btn-block" type="button">选项</button>
+            <button id="add-black" class="btn btn-block" type="button">加入黑名单</button>
+            <button class="btn btn-block" type="button">搜寻</button>
+            <button id="sync-data" class="btn btn-block" type="button">同步配置 <span class="label label-badge">12</span></button>
+            <span class="label label-success">今日记录数：10000</span>
         </div>
     </div>
 </body>
@@ -40,7 +43,6 @@
 <script src="/lib/jquery-3.4.1.min.js"></script>
 <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
 <script src="/lib/zui/zui.min.js"></script>
-<script src="/common/common.js"></script>
 <script src="./popup.js"></script>
 
 </html>

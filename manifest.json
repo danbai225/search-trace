@@ -8,7 +8,7 @@
     },
     "description": "寻迹-从这里开始",
     "author": "DanBai",
-    "background": { 
+    "background": {
         "service_worker": "background.js",
         "type": "module"
     },
@@ -27,11 +27,9 @@
         "http://*/*",
         "https://*/*"
     ],
-    "options_page": "setting/setting.html",
-    "options_ui": {
-        "page": "setting/setting.html"
-    },
     "permissions": [
-        "storage"
-      ]
+        "storage",
+        "tabs",
+        "alarms"
+    ]
 }
