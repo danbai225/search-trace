@@ -36,11 +36,17 @@ function get(api,data,success,error){
 loginFalg = false
 userinfo = {}
 taburl = ""
+host=""
+inBlacklist=false
 chrome.storage.sync.get(['data']).then((val) => {
-    if (val.data.token != undefined && val.data.name == undefined) {
+    
+    if (val.data.token != undefined) {
         loginFalg = true
-    } else if (val.data.token != undefined && val.data.name != undefined) {
-        loginFalg = true
+        host=val.data.host
+        if (val.data.blacklist!=undefined){
+            $("#black-list-num").html(val.data.blacklist.length)
+        }
+
     }
 });
 $(function () {
@@ -49,20 +55,27 @@ $(function () {
         currentWindow: true
     }, ([currentTab]) => {
         taburl = currentTab.url
+        if (taburl.indexOf("http")==-1){
+            $("#add-black").hide()
+            return
+        }
         chrome.runtime.sendMessage({
             type: "ruleMatch",
             data: taburl,
           },function(res){
               if (!res){
+                inBlacklist=true
                   $("#add-black").html("移除黑名单")
               }
           });
     });
     $("#login-bt").click(login);
+    
     $("#add-black").click(addTabUrlBlacklist);
     $("#sync-data").click(syncData);
     if (loginFalg) {
         setPage("start");
+        $("#search-bt").attr("href",host);
         get("/api/v1/user/info", {}, function (res) {
             if (res.code == 0) {
                 userinfo = res.data
@@ -138,16 +151,27 @@ function addTabUrlBlacklist() {
         domain = '';
     }
     if(domain!=""){
-        post("/api/v1/blacklist/add",{
-            "enable": true,
-            "mode": 1,
-            "match_pattern": 1,
-            "rules": domain
+        api="/api/v1/blacklist/add_domain"
+        str="移除黑名单"
+        if (inBlacklist){
+           str="加入黑名单"
+           api="/api/v1/blacklist/del_domain"
+           inBlacklist=false
+        }else{
+            inBlacklist=true
+        }
+        $("#add-black").html(str)
+        post(api,{"domain": domain},function(result, status, xhr){
+            syncData()
         })
     }
 }
 function syncData() {
     chrome.runtime.sendMessage({
         type: "syncData"
-      });
+      },function(res){
+        if (res!=undefined){
+            $("#black-list-num").html(res.length)
+        }
+    });
 }

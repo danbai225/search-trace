@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="input-username">用户名:</label>
-                <input type="password" class="form-control" id="input-username" placeholder="">
+                <input type="text" class="form-control" id="input-username" placeholder="">
             </div>
             <div class="form-group">
                 <label for="input-pass">密码:</label>
@@ -33,9 +33,8 @@
         </div>
         <div id="start-page">
             <button id="add-black" class="btn btn-block" type="button">加入黑名单</button>
-            <button class="btn btn-block" type="button">搜寻</button>
-            <button id="sync-data" class="btn btn-block" type="button">同步配置 <span class="label label-badge">12</span></button>
-            <span class="label label-success">今日记录数：10000</span>
+            <a id="search-bt" href="https://github.com/danbai225/search-trace" target="_blank"> <button class="btn btn-block" type="button">搜寻</button></a>
+            <button id="sync-data" class="btn btn-block" type="button">同步配置 <span id="black-list-num" class="label label-badge">0</span></button>
         </div>
     </div>
 </body>

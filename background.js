@@ -10,22 +10,26 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       break;
     case "syncData":
       syncData()
+      sendResponse(blacklist)
       break;
   }
 });
-var backlist = []
+var blacklist = []
 function ruleMatch(url) {
-  if (backlist.length == 0) {
+  if (blacklist.length == 0) {
     return true
   }
   var flg = true
-  backlist.forEach(
+  blacklist.forEach(
     item => {
       if (item.enable) {
         item.rules.split('\n').forEach(r => {
+          if (r.length==0){
+            return
+          }
           var reg
           if (item.match_pattern == 1) {
-            reg = new RegExp(r.replace(/\*/g, "[^ ]*"));
+            reg = new RegExp(r.replace(/\*/g, "[^]*"));
           } else {
             reg = new RegExp(r);
           }
@@ -55,8 +59,8 @@ function postDataFunc(data) {
   });
 }
 
-function syncData() {
-  chrome.storage.sync.get(['data']).then((val) => {
+async function syncData() {
+  await chrome.storage.sync.get(['data']).then((val) => {
     //黑名单配置
     if (val.data.host != undefined) {
       fetch.fetch(val.data.host + "/api/v1/blacklist/list", {
@@ -67,11 +71,11 @@ function syncData() {
       }).then(response => {
         if (response.ok) {
           response.json().then(json => {
-            val.data.backlist = json.data
+            val.data.blacklist = json.data
             chrome.storage.sync.set({
               "data": val.data
             });
-            backlist = json.data
+            blacklist = json.data
           })
         }
       });
