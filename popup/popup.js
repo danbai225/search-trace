@@ -1,93 +1,94 @@
-function post(api,data,success,error){
-    chrome.storage.sync.get(['data'],function(val){
-        host=val.data.host;
-        token=val.data.token;
+function post(api, data, success, error) {
+    chrome.storage.sync.get(["data"], function (val) {
+        host = val.data.host;
+        token = val.data.token;
         $.ajax({
             type: "post",
-            dataType: 'json',
-            url: host+api,
+            dataType: "json",
+            url: host + api,
             headers: {
-                "token": token
+                token: token,
             },
-            contentType: 'application/json',
+            contentType: "application/json",
             data: JSON.stringify(data),
             success: success,
-            error:error
+            error: error,
         });
     });
 }
-function get(api,data,success,error){
-    chrome.storage.sync.get(['data'],function(val){
-        host=val.data.host;
-        token=val.data.token;
+function get(api, data, success, error) {
+    chrome.storage.sync.get(["data"], function (val) {
+        host = val.data.host;
+        token = val.data.token;
         $.ajax({
             type: "get",
-            url: host+api,
+            url: host + api,
             headers: {
-                "token": token
+                token: token,
             },
-            dataType: 'json',
+            dataType: "json",
             data: data,
             success: success,
-            error:error
+            error: error,
         });
     });
 }
 loginFalg = false
 userinfo = {}
 taburl = ""
-host=""
-inBlacklist=false
+host = ""
+inBlacklist = false
 chrome.storage.sync.get(['data']).then((val) => {
-    
     if (val.data.token != undefined) {
         loginFalg = true
-        host=val.data.host
-        if (val.data.blacklist!=undefined){
+        host = val.data.host
+        if (val.data.blacklist != undefined) {
             $("#black-list-num").html(val.data.blacklist.length)
         }
 
     }
 });
+
 $(function () {
     chrome.tabs.query({
         active: true,
         currentWindow: true
     }, ([currentTab]) => {
         taburl = currentTab.url
-        if (taburl.indexOf("http")==-1){
+        if (taburl.indexOf("http") == -1) {
             $("#add-black").hide()
             return
         }
         chrome.runtime.sendMessage({
             type: "ruleMatch",
             data: taburl,
-          },function(res){
-              if (!res){
-                inBlacklist=true
-                  $("#add-black").html("移除黑名单")
-              }
-          });
+        }, function (res) {
+            if (!res) {
+                inBlacklist = true
+                $("#add-black").html("移除黑名单")
+            }
+        });
     });
     $("#login-bt").click(login);
-    
     $("#add-black").click(addTabUrlBlacklist);
     $("#sync-data").click(syncData);
     if (loginFalg) {
         setPage("start");
-        $("#search-bt").attr("href",host);
         get("/api/v1/user/info", {}, function (res) {
             if (res.code == 0) {
-                userinfo = res.data
+                userinfo = res.data;
             }
-        }, function () {
-            clear()
-            loginFalg = false
-            setPage("login");
-        })
+        },
+            function () {
+                clear();
+                loginFalg = false;
+                setPage("login");
+            }
+        );
     } else {
         setPage("login");
     }
+
 });
 
 function setPage(pageName) {
@@ -96,14 +97,14 @@ function setPage(pageName) {
     switch (pageName) {
         case "login":
             $("#login-page").show();
-            break
+            break;
         case "start":
             $("#start-page").show();
     }
 }
 
 function clear() {
-    chrome.storage.sync.set({ "data": {} });
+    chrome.storage.sync.set({ data: {} });
 }
 function login() {
     host = $("#input-server").val();
@@ -111,37 +112,37 @@ function login() {
     pass = $("#input-pass").val();
     $.ajax({
         type: "post",
-        dataType: 'json',
+        dataType: "json",
         url: host + "/api/get_token",
-        contentType: 'application/json',
+        contentType: "application/json",
         data: JSON.stringify({
-            "name": username,
-            "pass": pass
+            name: username,
+            pass: pass,
         }),
         success: function (result, status, xhr) {
             if (result.code == 0) {
                 chrome.storage.sync.set({
-                    "data": {
-                        "host": host,
-                        "token": result.data
-                    }
+                    data: {
+                        host: host,
+                        token: result.data,
+                    },
                 });
                 setPage("start");
             } else {
                 new $.zui.Messager("账号或密码不正确", {
-                    type: 'warning'
+                    type: "warning",
                 }).show();
             }
         },
         error: function (xhr, status, error) {
             new $.zui.Messager(error, {
-                type: "danger"
+                type: "danger",
             }).show();
-        }
+        },
     });
 }
 function addTabUrlBlacklist() {
-    if (taburl.indexOf("http")==-1){
+    if (taburl.indexOf("http") == -1) {
         return
     }
     var domain = taburl.split('/');
@@ -150,18 +151,18 @@ function addTabUrlBlacklist() {
     } else {
         domain = '';
     }
-    if(domain!=""){
-        api="/api/v1/blacklist/add_domain"
-        str="移除黑名单"
-        if (inBlacklist){
-           str="加入黑名单"
-           api="/api/v1/blacklist/del_domain"
-           inBlacklist=false
-        }else{
-            inBlacklist=true
+    if (domain != "") {
+        api = "/api/v1/blacklist/add_domain"
+        str = "移除黑名单"
+        if (inBlacklist) {
+            str = "加入黑名单"
+            api = "/api/v1/blacklist/del_domain"
+            inBlacklist = false
+        } else {
+            inBlacklist = true
         }
         $("#add-black").html(str)
-        post(api,{"domain": domain},function(result, status, xhr){
+        post(api, { "domain": domain }, function (result, status, xhr) {
             syncData()
         })
     }
@@ -169,8 +170,8 @@ function addTabUrlBlacklist() {
 function syncData() {
     chrome.runtime.sendMessage({
         type: "syncData"
-      },function(res){
-        if (res!=undefined){
+    }, function (res) {
+        if (res != undefined) {
             $("#black-list-num").html(res.length)
         }
     });
