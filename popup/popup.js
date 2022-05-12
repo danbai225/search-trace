@@ -45,7 +45,7 @@ chrome.storage.sync.get(['data']).then((val) => {
         if (val.data.blacklist != undefined) {
             $("#black-list-num").html(val.data.blacklist.length)
         }
-
+        $("#search-bt").attr("href",host)
     }
 });
 
