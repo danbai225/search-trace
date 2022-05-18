@@ -73,14 +73,16 @@ function getText() {
 function postText(text) {
   oldText = text;
   if (text.length > 0) {
-    chrome.runtime.sendMessage({
-      type: "postText",
-      data: {
-        title: document.title,
-        content: text,
-        url: document.URL,
-      },
-    });
+    if (chrome.runtime?.id!=undefined) {
+      chrome.runtime.sendMessage({
+        type: "postText",
+        data: {
+          title: document.title,
+          content: text,
+          url: document.URL,
+        },
+      });
+    }
   }
 }
 function myChange() {
