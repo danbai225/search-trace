@@ -62,7 +62,7 @@ function postDataFunc(data) {
 async function syncData() {
   await chrome.storage.sync.get(['data']).then((val) => {
     //黑名单配置
-    if (val.data.host != undefined) {
+    if (val.data!=undefined&&val.data.host != undefined) {
       fetch.fetch(val.data.host + "/api/v1/blacklist/list", {
         method: "GET",
         headers: {

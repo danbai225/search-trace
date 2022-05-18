@@ -39,7 +39,7 @@ taburl = ""
 host = ""
 inBlacklist = false
 chrome.storage.sync.get(['data']).then((val) => {
-    if (val.data.token != undefined) {
+    if (val.data!=undefined&&val.data.token != undefined) {
         loginFalg = true
         host = val.data.host
         if (val.data.blacklist != undefined) {
