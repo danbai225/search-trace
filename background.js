@@ -44,7 +44,7 @@ function ruleMatch(url) {
 }
 function postDataFunc(data) {
   chrome.storage.sync.get(['data']).then((val) => {
-    if (val.data.host != undefined) {
+    if (val.data!=undefined&&val.data.host != undefined) {
       if (ruleMatch(data.url)) {
         fetch.fetch(val.data.host + "/api/v1/trace/add", {
           method: "POST",
